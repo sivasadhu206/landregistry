@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LedgeLand Registry</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg,#0f172a,#1e293b);
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        button {
+            background: linear-gradient(45deg,#3b82f6,#6366f1);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .loader {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .success { color: lightgreen; }
+        .error { color: red; }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>🏛️ LedgeLand Registry</h2>
+
+    <div>
+        <button id="connectButton" onclick="connectWallet()">
+            🔗 Connect Wallet
+        </button>
+        <span id="walletDisplay" style="margin-left:15px; color:#38bdf8;"></span>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- REGISTER LAND -->
+    <div class="card">
+        <h3>📥 Register Land (Admin Only)</h3>
+        <input type="file" id="fileInput" />
+        <button onclick="processExcel()">Upload & Register</button>
+        <div class="loader" id="loader">⏳ Processing...</div>
+        <p id="registerStatus"></p>
+    </div>
+
+    <!-- SEARCH LAND -->
+    <div class="card">
+        <h3>🔍 Search Land</h3>
+        <input type="number" id="searchLandId" placeholder="Enter Land ID" />
+        <button onclick="searchLand()">Search</button>
+        <div class="loader" id="searchLoader">⏳ Searching...</div>
+        <div id="result"></div>
+    </div>
+
+    <!-- TRANSFER LAND -->
+    <div class="card">
+        <h3>🔄 Transfer Ownership</h3>
+        <input type="number" id="transferLandId" placeholder="Land ID" />
+        <input type="text" id="newOwner" placeholder="New Owner Wallet Address" />
+        <button onclick="transferLand()">Transfer</button>
+        <div class="loader" id="transferLoader">⏳ Processing...</div>
+        <p id="transferStatus"></p>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
